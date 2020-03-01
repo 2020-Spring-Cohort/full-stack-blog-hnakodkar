@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns ="http://www.w3.org/1999/xhtml"
+      xmlns:th=“https://www.thymeleaf.org”>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h2 th:text="${category.Name}" ></h2>
+<div th:each=" post: ${category.posts}"> <a  th:href="@{'/categories/{categoryName}/' + ${post.postTitle}}" ></a>
+    <h2 th:text="${post.postTitle}" ></h2>
+    <h2 th:text="${post.hashtag}" ></h2>
+    <h3 th:text="${post.description}" ></h3>
+    <h3 th:text="${post.publishedDate}" ></h3>
+
+</div>
+
+
+
+<!--<form method="POST" th:action="'/categories/'+ ${category.name} + '/add-category'">-->
+<!--    <input name="categoryId" th:value="${category.id}" type="hidden">-->
+<!--    <input type="text">-->
+<!--    <input type="submit"-->
+<!--</form>-->
+
+
+</body>
+</html>

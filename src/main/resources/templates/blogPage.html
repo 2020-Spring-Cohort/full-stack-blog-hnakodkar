@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th=“https://www.thymeleaf.org”>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Blog Page</title>
+    <link rel="stylesheet" href="/css/homepage.css" />
+</head>
+
+<body>
+<h1>Blog Page</h1>
+
+    <nav class="nav_bar">
+        <a class="nav_link_1" href="post.html">Posts</a>
+        <a class="nav_link_2" href="author.html">Author</a>
+        <a class="nav_link_3" href="category.html">Categories</a>
+        <a class="nav_link_4" href="hashtags.html">Tags</a>
+    </nav>
+<h2>Categories</h2>
+
+<h3 th:each="category:${categories}"><a th:href="@{'/categories/'+ ${category.name}}"
+                                        th:text="${category.name}"></a></h3>
+
+<form action="/add-category" method="POST">
+    <input name="categoryName" type="text">
+    <button type="submit">Add Category</button>
+</form>
+
+</body>
+
+</html>
