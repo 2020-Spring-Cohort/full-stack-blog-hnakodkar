@@ -11,6 +11,7 @@ import java.util.Collection;
 public class CategoryStorageJpaImpl implements CategoryStorage {
 
     private final CategoryRepository categoryRepository;
+    private Collection<Category> categories;
 
 
     public CategoryStorageJpaImpl(CategoryRepository categoryRepository) {
@@ -33,6 +34,11 @@ public class CategoryStorageJpaImpl implements CategoryStorage {
     @Override
     public Category findCategoryByName(String categoryName) {
         return categoryRepository.findCategoryByName(categoryName).get();
+    }
+
+    @Override
+    public Category findCategoryById(Long id) {
+        return categoryRepository.findCategoryById(id).get();
     }
 
 }

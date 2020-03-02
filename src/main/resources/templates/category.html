@@ -5,24 +5,20 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<body>
 
-<h2 th:text="${category.Name}" ></h2>
-<div th:each=" post: ${category.posts}"> <a  th:href="@{'/categories/{categoryName}/' + ${post.postTitle}}" ></a>
+<body>
+<h2 th:each="post:${category.posts}"><a th:href="@{'/categories/'+ ${category.name}}"></a>
     <h2 th:text="${post.postTitle}" ></h2>
-    <h2 th:text="${post.hashtag}" ></h2>
     <h3 th:text="${post.description}" ></h3>
     <h3 th:text="${post.publishedDate}" ></h3>
 
-</div>
+</h2>
+<div th:each="post : ${category.posts}" th:text = "${category.name}"></div>
+<form action="/post/{id}" method="POST">
+    <input name="categoryName" type="text">
+    <button type="submit">Add post</button>
+</form>
 
-
-
-<!--<form method="POST" th:action="'/categories/'+ ${category.name} + '/add-category'">-->
-<!--    <input name="categoryId" th:value="${category.id}" type="hidden">-->
-<!--    <input type="text">-->
-<!--    <input type="submit"-->
-<!--</form>-->
 
 
 </body>

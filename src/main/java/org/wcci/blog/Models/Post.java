@@ -1,6 +1,8 @@
 package org.wcci.blog.Models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Objects;
 
@@ -10,29 +12,11 @@ public class Post {
     @GeneratedValue
     private Long id;
 
-    private String postTitle;
-    private String hashtag;
-    private String description;
-    private String publishedDate;
-
     @ManyToOne
     private Category category;
-
-    public String getPublishedDate() {
-        return publishedDate;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public Author getAuthor() {
-        return author;
-    }
-
-    public Collection<Hashtag> getHashtags() {
-        return hashtags;
-    }
+    private String postTitle;
+    private String description;
+    private String publishedDate;
 
     @ManyToOne
     private Author author;
@@ -41,29 +25,34 @@ public class Post {
     private Collection<Hashtag> hashtags;
 
 
-    public Post(String title, String hashtag, String description, String publishedDate, Category category) {
+    public Post(String title, String hashtag, String description, String publishedDate, Category category, Hashtag...hashtags) {
 
         this.postTitle = title;
-        this.hashtag = hashtag;
         this.description = description;
         this.publishedDate = publishedDate;
         this.category = category;
+        this.hashtags = new ArrayList<Hashtag>(Arrays.asList(hashtags));
     }
     public Post(String title){
          this.postTitle = title;
     }
 
-    public Post() {
+    public Post(){}
+
+
+    public Post(Category retrieveCategory, String postTitle, String description, String publishedDate) {
     }
+
 
     public String getPostTitle() {
 
         return postTitle;
     }
 
-    public String getHashtag() {
-        return hashtag;
+    public Collection<Hashtag>getHashtags(){
+        return hashtags;
     }
+
 
 
     public String getDescription() {
@@ -74,22 +63,43 @@ public class Post {
         return id;
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public void addHashtag(Hashtag hashtagToAddToPost) {
+        if (!this.hashtags.contains(hashtagToAddToPost)) {
+            hashtags.add(hashtagToAddToPost);
+        }
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Post)) return false;
         Post post = (Post) o;
         return Objects.equals(id, post.id) &&
+                Objects.equals(category, post.category) &&
                 Objects.equals(postTitle, post.postTitle) &&
                 Objects.equals(description, post.description) &&
-                Objects.equals(hashtag, post.hashtag) &&
                 Objects.equals(publishedDate, post.publishedDate) &&
-                Objects.equals(category, post.category) &&
                 Objects.equals(author, post.author);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, postTitle, description, hashtag, publishedDate, category, author);
+        return Objects.hash(id, category, postTitle, description, publishedDate, author);
+    }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "id=" + id +
+                ", category=" + category +
+                ", postTitle='" + postTitle + '\'' +
+                ", description='" + description + '\'' +
+                ", publishedDate='" + publishedDate + '\'' +
+                ", author=" + author +
+                '}';
     }
 }

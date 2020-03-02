@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.wcci.blog.Models.Category;
+import org.wcci.blog.Models.Post;
 import org.wcci.blog.storage.AuthorStorage;
 import org.wcci.blog.storage.CategoryStorage;
 import org.wcci.blog.storage.PostStorage;
@@ -17,6 +18,7 @@ import java.util.HashMap;
 public class CategoryController {
 
     private final CategoryStorage categoryStorage;
+    private PostStorage postStorage;
 
     public CategoryController(CategoryStorage categoryStorage,PostStorage postStorage, AuthorStorage authorStorage) {
 

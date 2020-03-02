@@ -11,5 +11,7 @@ public interface CategoryStorage {
 
     Category findCategoryByName(String categoryName);
 
+    Category findCategoryById(Long id);
 }
+
 
